@@ -15,26 +15,26 @@ common warnings
     -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates
     -Wmissing-import-lists
 
+common base
+  build-depends: base ^>=4.17
+
 library
-  import:           warnings
+  import:           warnings, base
   exposed-modules:  MyLib
-  build-depends:    base ^>=4.19
   hs-source-dirs:   src
   default-language: GHC2021
 
 executable squizz
-  import:           warnings
+  import:           warnings, base
   main-is:          Main.hs
-  build-depends:
-    , base    ^>=4.19
-    , squizz
-
+  build-depends:    squizz
   hs-source-dirs:   app
   default-language: GHC2021
 
 test-suite squizz-test
+  import:             warnings, base
+  ghc-options:        -Wno-missing-import-lists
   build-tool-depends: tasty-discover:tasty-discover
-  import:             warnings
   default-language:   GHC2021
   type:               exitcode-stdio-1.0
   hs-source-dirs:     test
@@ -44,7 +44,6 @@ test-suite squizz-test
     TastyDriver
 
   build-depends:
-    , base         ^>=4.19
     , doctest      ^>=0.22.2
     , hspec        ^>=2.11.7
     , squizz
