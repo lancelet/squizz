@@ -1,15 +1,21 @@
 module Main (main) where
 
-import qualified TastyDriver
+import System.IO (hFlush, stdout)
+import TastyDriver qualified
 import Test.DocTest (doctest)
 
 main :: IO ()
 main = do
   runDocTests
-  -- runTastyTests
+  runTastyTests
 
 printBanner :: String -> IO ()
-printBanner = putStrLn
+printBanner banner = do
+  hFlush stdout
+  putStr "\ESC[0;32m--- "
+  putStr banner
+  putStr " ---\ESC[0m\n"
+  hFlush stdout
 
 runTastyTests :: IO ()
 runTastyTests = do
@@ -18,5 +24,5 @@ runTastyTests = do
 
 runDocTests :: IO ()
 runDocTests = do
-  printBanner "DocTests"
+  printBanner "Doc Tests"
   doctest ["-isrc", "src"]
