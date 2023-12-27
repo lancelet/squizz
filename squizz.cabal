@@ -20,7 +20,12 @@ common base
 
 library
   import:           warnings, base
-  exposed-modules:  MyLib
+  exposed-modules:
+    Squizz.PPM
+    Squizz.Rasterize
+    Squizz.TestImages
+    Squizz.Types
+
   hs-source-dirs:   src
   default-language: GHC2021
 
